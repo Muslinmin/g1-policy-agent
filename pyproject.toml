@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "g1-policy-agent"
+version = "0.1.0"
+description = "Run imitation-learning policies on a Unitree G1: on-robot agent, remote policy server, training"
+requires-python = ">=3.10"
+dependencies = ["numpy", "pyzmq", "msgpack"]
+
+[project.optional-dependencies]
+robot = ["pyrealsense2", "opencv-python"]       # plus unitree_sdk2_python, installed from source (docs/G1_SETUP.md)
+server = ["lerobot>=0.4.1", "pillow"]
+train = ["lerobot>=0.4.1"]
+dev = ["pytest"]
+
+[project.scripts]
+g1-agent = "g1agent.cli:main"
+g1-server = "g1server.server:main"
+
+[tool.setuptools.packages.find]
+include = ["g1agent*", "g1server*"]
